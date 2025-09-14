@@ -19,9 +19,19 @@ This will installs dependencies in three locations:
 - `package.json` inside `notification-service/` folder
 
 ## 2. Build and start broker + services
+
+To start all services, use one of the following commands:
+
+Default build and run:
 ```
 docker compose up --build
 ```
+
+Run with reduced logs (detached mode):
+```
+docker compose up --build --quiet-pull -d
+```
+> The `--quiet-pull -d` options reduce logs and run services in the background.
 
 This will start:
 - RabbitMQ broker
