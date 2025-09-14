@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: mp_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  order-service:
+    build: ./order-service
+    container_name: mp_order_service
+    environment:
+      - RABBITMQ_URL=amqp://rabbitmq
+      - PORT=8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./order-service:/app
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+  notification-service:
+    build: ./notification-service
+    container_name: mp_notification_service
+    environment:
+      - RABBITMQ_URL=amqp://rabbitmq
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./notification-service:/app
+    depends_on:
+      rabbitmq:
+        condition: service_healthy

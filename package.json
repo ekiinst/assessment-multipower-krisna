@@ -1,0 +1,29 @@
+{
+  "name": "assessment-multipower-krisna",
+  "version": "1.0.0",
+  "description": "Requirements: Docker installed.",
+  "main": "index.js",
+  "scripts": {
+    "install:all": "npm install && npm install --prefix order-service && npm install --prefix notification-service",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "jest tests/order.test.js",
+    "test:integration": "npm run test:integration:js && npm run test:integration:sh",
+    "test:integration:js": "jest tests/integration.test.js",
+    "test:integration:sh": "bash tests/integration_test.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ekiinst/assessment-multipower-krisna.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ekiinst/assessment-multipower-krisna/issues"
+  },
+  "homepage": "https://github.com/ekiinst/assessment-multipower-krisna#readme",
+  "devDependencies": {
+    "jest": "^30.1.3"
+  }
+}
